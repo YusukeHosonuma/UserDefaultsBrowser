@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserDefaultsBrowser
 
 let groupID = "group.UserDefaultsBrowser"
 
@@ -19,9 +20,19 @@ struct ExampleApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            UserDefaultsBrowserContainer(
+                suiteNames: [groupID],
+                excludeKeys: { $0.hasPrefix("not-display-key") },
+                accentColor: .red,
+                imageName: "wrench.and.screwdriver",
+                displayStyle: .fullScreen
+            ) {
+                ContentView()
+            }
         }
     }
+
+    // MARK: Private
 
     private func setupExampleData() {
         if isFirstLaunch {
@@ -39,6 +50,7 @@ struct ExampleApp: App {
             //
             let standard = UserDefaults.standard
             standard.set("Hello!", forKey: "message")
+            standard.set("Not display in browser", forKey: "not-display-key")
             standard.set(7.5, forKey: "number")
             standard.set(URL(string: "https://github.com/YusukeHosonuma/UserDefaultsBrowser")!, forKey: "url")
             standard.set(Date(), forKey: "date")
