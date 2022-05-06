@@ -1,5 +1,5 @@
-import XCTest
 @testable import UserDefaultsBrowser
+import XCTest
 
 final class UserDefaultsBrowserTests: XCTestCase {
     func testExample() throws {

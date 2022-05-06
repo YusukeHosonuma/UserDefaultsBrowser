@@ -10,7 +10,7 @@ import UserDefaultsBrowser
 
 struct ContentView: View {
     @State private var isPresented = false
-    
+
     var body: some View {
         Button("Open UserDefaultsBrowser") {
             isPresented.toggle()

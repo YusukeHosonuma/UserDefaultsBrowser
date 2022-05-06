@@ -16,13 +16,13 @@ struct ExampleApp: App {
     init() {
         setupExampleData()
     }
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
-    
+
     private func setupExampleData() {
         if isFirstLaunch {
             defer { isFirstLaunch = false }
