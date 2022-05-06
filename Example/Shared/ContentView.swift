@@ -12,11 +12,15 @@ struct ContentView: View {
     @State private var isPresented = false
 
     var body: some View {
-        Button("Open UserDefaultsBrowser") {
-            isPresented.toggle()
+        NavigationView {
+            Button("Open UserDefaultsBrowser") {
+                isPresented.toggle()
+            }
+            .navigationTitle("Example")
+            .sheet(isPresented: $isPresented) {
+                UserDefaultsBrowserView(suiteNames: ["group.UserDefaultsBrowser"])
+            }
         }
-        .sheet(isPresented: $isPresented) {
-            UserDefaultsBrowserView(suiteNames: ["group.UserDefaultsBrowser"])
-        }
+        .navigationViewStyle(.stack)
     }
 }
