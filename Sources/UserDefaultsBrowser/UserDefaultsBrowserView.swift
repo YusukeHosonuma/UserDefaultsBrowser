@@ -44,19 +44,55 @@ public struct UserDefaultsBrowserView: View {
     }
 
     public var body: some View {
-        TabView {
-            tabContent(title: "User") {
-                SearchContainerView(type: .user, defaults: defaults)
-            }
-            .tabItem {
-                Label("User", systemImage: "person")
-            }
+        Group {
+            if presentationMode.wrappedValue.isPresented {
+                TabView {
+                    //
+                    // 􀉩 User
+                    //
+                    tabContent(title: "User") {
+                        SearchContainerView(type: .user, defaults: defaults)
+                    }
+                    .tabItem {
+                        Label("User", systemImage: "person")
+                    }
 
-            tabContent(title: "System") {
-                SearchContainerView(type: .system, defaults: defaults)
-            }
-            .tabItem {
-                Label("System", systemImage: "iphone")
+                    //
+                    // 􀟜 System
+                    //
+                    tabContent(title: "System") {
+                        SearchContainerView(type: .system, defaults: defaults)
+                    }
+                    .tabItem {
+                        Label("System", systemImage: "iphone")
+                    }
+                }
+            } else {
+                NavigationView {
+                    List {
+                        //
+                        // 􀉩 User
+                        //
+                        NavigationLink {
+                            SearchContainerView(type: .user, defaults: defaults)
+                                .navigationTitle("User")
+                        } label: {
+                            Label("User", systemImage: "person")
+                        }
+
+                        //
+                        // 􀟜 System
+                        //
+                        NavigationLink {
+                            SearchContainerView(type: .system, defaults: defaults)
+                                .navigationTitle("System")
+                        } label: {
+                            Label("System", systemImage: "iphone")
+                        }
+                    }
+                    .navigationTitle("UserDefaults Browser")
+                    .navigationBarTitleDisplayMode(.inline)
+                }
             }
         }
         .accentColor(accentColor)

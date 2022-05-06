@@ -12,15 +12,25 @@ struct ContentView: View {
     @State private var isPresented = false
 
     var body: some View {
-        NavigationView {
-            Button("Open UserDefaultsBrowser") {
-                isPresented.toggle()
+        TabView {
+            NavigationView {
+                Button("Open UserDefaultsBrowser") {
+                    isPresented.toggle()
+                }
+                .navigationTitle("Example")
+                .sheet(isPresented: $isPresented) {
+                    UserDefaultsBrowserView(suiteNames: [groupID])
+                }
             }
-            .navigationTitle("Example")
-            .sheet(isPresented: $isPresented) {
-                UserDefaultsBrowserView(suiteNames: ["group.UserDefaultsBrowser"])
+            .tabItem {
+                Label("Example", systemImage: "swift")
             }
+            .navigationViewStyle(.stack)
+
+            UserDefaultsBrowserView(suiteNames: [groupID])
+                .tabItem {
+                    Label("Browser", systemImage: "externaldrive")
+                }
         }
-        .navigationViewStyle(.stack)
     }
 }
