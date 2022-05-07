@@ -99,12 +99,12 @@ struct ValueEditView: View {
                 }
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
+                        Spacer()
                         Button {
                             isPresentedConfirmDelete.toggle()
                         } label: {
                             Image(systemName: "trash")
                         }
-                        Spacer()
                     }
                 }
             }
