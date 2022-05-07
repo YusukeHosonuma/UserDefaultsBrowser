@@ -26,7 +26,7 @@ class ViewController: UIViewController { // Your root ViewController
 }
 ```
 
-<img width="361" alt="image" src="https://user-images.githubusercontent.com/2990285/167238791-e15f66d4-0f03-4503-a9fd-141c55f60bfa.png">
+<img width="250" alt="image" src="https://user-images.githubusercontent.com/2990285/167238791-e15f66d4-0f03-4503-a9fd-141c55f60bfa.png">
 
 ### Add Browser to ViewController
 
@@ -59,4 +59,4 @@ class TabItemViewController: UIViewController {
 }
 ```
 
-<img width="361" alt="image" src="https://user-images.githubusercontent.com/2990285/167238851-b287e307-5482-49d4-a2ec-05bef78269cd.png">
+<img width="250" alt="image" src="https://user-images.githubusercontent.com/2990285/167238851-b287e307-5482-49d4-a2ec-05bef78269cd.png">
