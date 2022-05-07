@@ -22,10 +22,10 @@ struct ContentView: View {
                     UserDefaultsBrowserView(suiteNames: [groupID])
                 }
             }
+            .navigationViewStyle(.stack) // ⚠️ This is not work. (SwiftUI bug?)
             .tabItem {
                 Label("Example", systemImage: "swift")
             }
-            .navigationViewStyle(.stack)
 
             UserDefaultsBrowserView(suiteNames: [groupID])
                 .tabItem {

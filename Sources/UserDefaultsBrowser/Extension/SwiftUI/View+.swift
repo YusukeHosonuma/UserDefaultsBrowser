@@ -11,4 +11,8 @@ extension View {
     func extend<Content: View>(@ViewBuilder _ content: (Self) -> Content) -> some View {
         content(self)
     }
+
+    func enabled(_ enabled: Bool) -> some View {
+        disabled(enabled == false)
+    }
 }

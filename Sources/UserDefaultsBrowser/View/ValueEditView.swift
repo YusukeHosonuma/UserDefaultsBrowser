@@ -99,12 +99,12 @@ struct ValueEditView: View {
                 }
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
+                        Spacer()
                         Button {
                             isPresentedConfirmDelete.toggle()
                         } label: {
                             Image(systemName: "trash")
                         }
-                        Spacer()
                     }
                 }
             }
@@ -133,13 +133,13 @@ struct ValueEditView: View {
     @ViewBuilder
     private func valueEditor() -> some View {
         switch valueType {
-        case .bool:
-            BoolEditor(value: $valueBool)
-                .padding([.horizontal, .bottom])
-
         case .string:
             TextEditor(text: $valueString)
                 .style(.valueEditor)
+                .padding([.horizontal, .bottom])
+
+        case .bool:
+            BoolEditor(value: $valueBool)
                 .padding([.horizontal, .bottom])
 
         case .int:
@@ -217,6 +217,10 @@ struct ValueEditView: View {
         let value = defaults.lookup(forKey: key)
 
         switch value {
+        case let value as String:
+            valueType = .string
+            valueString = value
+
         case let value as Bool:
             valueType = .bool
             valueBool = value
@@ -233,9 +237,13 @@ struct ValueEditView: View {
             valueType = .double
             valueDouble = value
 
-        case let value as String:
-            valueType = .string
-            valueString = value
+        case let value as URL:
+            valueType = .url
+            valueURL = value
+
+        case let value as Date:
+            valueType = .date
+            valueDate = value
 
         case let value as [Any]:
             valueType = .array
@@ -254,61 +262,59 @@ struct ValueEditView: View {
             valueJSONString = value
 
         default:
-            //
-            // 💡 Note:
-            // The `URL` type was stored by encoded `Data`.
-            // Therefore must use `url(forKey:)`.
-            //
-            if let url = defaults.url(forKey: key) {
-                valueType = .url
-                valueURL = url
-            } else {
-                let object = defaults.object(forKey: key)
-
-                switch object {
-                case let value as Date:
-                    valueType = .date
-                    valueDate = value
-                default:
-                    valueType = .unknown
-                    print("type: \(String(describing: object.self))")
-                }
-            }
+            let object = defaults.object(forKey: key)
+            valueType = .unknown
+            print("type: \(String(describing: object.self))")
         }
     }
 
     private func save() {
+        func write<T>(_ value: T) {
+            defaults.set(value, forKey: key) // ✅ Capture `key`
+        }
+
         switch valueType {
         case .string:
-            defaults.set(valueString, forKey: key)
+            write(valueString)
+
         case .bool:
-            defaults.set(valueBool, forKey: key)
+            write(valueBool)
+
         case .int:
-            defaults.set(valueInt, forKey: key)
+            write(valueInt)
+
         case .float:
-            defaults.set(valueFloat, forKey: key)
+            write(valueFloat)
+
         case .double:
-            defaults.set(valueDouble, forKey: key)
+            write(valueDouble)
+
         case .url:
-            defaults.set(valueURL, forKey: key)
+            write(valueURL)
+
         case .date:
-            defaults.set(valueDate, forKey: key)
+            write(valueDate)
+
         case .array:
-            defaults.set(valueArray, forKey: key)
+            write(valueArray)
+
         case .dictionary:
-            defaults.set(valueDictionary, forKey: key)
+            write(valueDictionary)
+
         case .jsonData:
             if let dict = valueJSONData?.dictionary, let data = dict.prettyJSON.data(using: .utf8) {
-                defaults.set(data, forKey: key)
+                write(data)
             } else {
                 preconditionFailure("Can't save JSON as `Data` type.")
             }
+
         case .jsonString:
             if let dict = valueJSONString?.dictionary, let json = dict.serializedJSON {
-                defaults.set(json, forKey: key)
+                write(json)
             } else {
                 preconditionFailure("Can't save JSON as `String` type.")
             }
+
         case .unknown:
             return
         }

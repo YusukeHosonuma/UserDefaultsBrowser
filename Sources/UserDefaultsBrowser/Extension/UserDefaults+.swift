@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension UserDefaults {
     static let keyRepository = "YusukeHosonuma/UserDefaultsBrowser"
@@ -14,21 +15,42 @@ extension UserDefaults {
     static let keyPrefix: String = "\(keyRepository)/\(keyVersion)/"
 
     func lookup(forKey key: String) -> Any? {
-        if let _ = value(forKey: key) as? Data, let url = url(forKey: key) {
-            return url
+        //
+        // Data
+        //
+        if let data = value(forKey: key) as? Data {
+            //
+            // URL
+            //
+            if let url = url(forKey: key) {
+                return url
+            }
+
+            //
+            // UIImage
+            //
+            if let image = UIImage(data: data) {
+                return image
+            }
+
+            //
+            // JSON encoded Data
+            //
+            if let decoded = try? JSONSerialization.jsonObject(with: data), let dict = decoded as? [String: Any] {
+                return JSONData(dictionary: dict)
+            }
         }
 
+        //
+        // Dictionary
+        //
         if let dict = dictionary(forKey: key) {
             return dict
         }
 
-        if let data = data(forKey: key),
-           let decoded = try? JSONSerialization.jsonObject(with: data),
-           let dict = decoded as? [String: Any]
-        {
-            return JSONData(dictionary: dict)
-        }
-
+        //
+        // JSON encoded String
+        //
         if let string = string(forKey: key),
            string.hasPrefix("{"),
            string.hasSuffix("}"),
