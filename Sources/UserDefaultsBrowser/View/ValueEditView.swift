@@ -270,7 +270,7 @@ struct ValueEditView: View {
 
     private func save() {
         func write<T>(_ value: T) {
-            defaults.set(value, forKey: key) // ✅ Capture `key`
+            defaults.set(value, forKey: key)
         }
 
         switch valueType {
