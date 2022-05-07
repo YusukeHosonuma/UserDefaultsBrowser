@@ -8,6 +8,7 @@
 import SwiftUI
 
 private var overlayWindow: UIWindow?
+private let overlayWindowSize = CGSize(width: 44, height: 44)
 
 //
 // 􀤂 Display launcher icon on leading-bottom.
@@ -22,7 +23,13 @@ public func setupUserDefaultsBrowserLauncher(
     if let rootWindow = UIApplication.rootWindow, let scene = UIApplication.rootScene {
         let window = UIWindow(windowScene: scene)
         window.backgroundColor = .clear
-        window.frame = CGRect(x: 16, y: (UIScreen.main.bounds.height - 24) - 16, width: 24, height: 24)
+        window.frame = CGRect(
+            origin: CGPoint(
+                x: 0,
+                y: UIScreen.main.bounds.height - (overlayWindowSize.height + rootWindow.safeAreaInsets.bottom)
+            ),
+            size: overlayWindowSize
+        )
         window.windowLevel = .alert + 1
 
         let vc = UserDefaultsBrowserLauncherViewController(

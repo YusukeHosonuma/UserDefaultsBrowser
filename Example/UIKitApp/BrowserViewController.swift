@@ -9,14 +9,13 @@ import UIKit
 import UserDefaultsBrowser
 
 class BrowserViewController: UIViewController {
-    
     override func viewDidLoad() {
         let vc = UserDefaultsBrowserViewController(
             suiteNames: [groupID],
             excludeKeys: { $0.hasPrefix("not-display-key") },
             accentColor: .systemPurple
         )
-        
+
         addChild(vc)
         view.addSubview(vc.view)
         vc.didMove(toParent: self)

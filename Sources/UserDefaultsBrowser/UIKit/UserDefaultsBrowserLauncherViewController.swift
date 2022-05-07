@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 //
 // 􀤂 Launcher icon on leading-bottom.
@@ -36,14 +37,17 @@ final class UserDefaultsBrowserLauncherViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        let button = UIButton()
+        let button = ExpansionButton()
         button.setImage(UIImage(systemName: imageName), for: .normal)
         button.tintColor = accentColor
+        button.insets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         view.addSubview(button)
 
+        // Both-center
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
     }
 
@@ -60,5 +64,20 @@ final class UserDefaultsBrowserLauncherViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// 🌱 Special Thanks.
+// https://qiita.com/KokiEnomoto/items/264f26bfa92d06b1996e
+private class ExpansionButton: UIButton {
+    var insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
+    override func point(inside point: CGPoint, with _: UIEvent?) -> Bool {
+        var rect = bounds
+        rect.origin.x -= insets.left
+        rect.origin.y -= insets.top
+        rect.size.width += insets.left + insets.right
+        rect.size.height += insets.top + insets.bottom
+        return rect.contains(point)
     }
 }
