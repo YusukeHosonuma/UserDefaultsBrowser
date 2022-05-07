@@ -8,7 +8,8 @@ Browse and edit [UserDefaults](https://developer.apple.com/documentation/foundat
 
 **Note:**
 
-We recommend to use [SwiftUI-Simulator](https://github.com/YusukeHosonuma/SwiftUI-Simulator), if you use it in an app built with SwiftUI. (This feature is also included)
+We recommend to use [SwiftUI-Simulator](https://github.com/YusukeHosonuma/SwiftUI-Simulator), if you use it in an app built with SwiftUI.<br>
+(This feature is also included)
 
 ## Supported types
 
