@@ -1,6 +1,14 @@
-# UserDefaultsBrowser
+# UserDefaults-Browser
 
-Browse and edit [UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults) on your app.
+Browse and edit [UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults) on your app that build with SwiftUI or UIKit.
+
+**Note:**
+
+We recommend to use [SwiftUI-Simulator](https://github.com/YusukeHosonuma/SwiftUI-Simulator), if you use it in an app built with SwiftUI. (This feature is also included)
+
+| Browse | Edit (as JSON) | Edit (Date) | Export |
+| -- | -- | -- | -- |
+|<img width="371" alt="image" src="https://user-images.githubusercontent.com/2990285/167252878-b249117e-cc82-46f4-a983-f200d5a0bbc7.png">|<img width="371" alt="image" src="https://user-images.githubusercontent.com/2990285/167252911-19ecbe95-91d8-406f-88a1-aae6b6ade73a.png">|<img width="371" alt="image" src="https://user-images.githubusercontent.com/2990285/167252933-a024d34f-8442-4105-b1cc-fd6558209a81.png">|<img width="371" alt="image" src="https://user-images.githubusercontent.com/2990285/167252960-b33a9c62-f38d-46fd-a518-874dcf21aad5.png">|
 
 ## Supported types
 
