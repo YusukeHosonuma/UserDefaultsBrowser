@@ -39,9 +39,9 @@ class TabItemViewController: UIViewController {
         // ✅ All arguments are optional.
         //
         let vc = UserDefaultsBrowserViewController(
-            suiteNames: [groupID],
-            excludeKeys: { $0.hasPrefix("not-display-key") },
-            accentColor: .systemPurple
+            suiteNames: ["group.xxx"],                        // AppGroups IDs
+            excludeKeys: { $0.hasPrefix("not-display-key") }, // Exclude keys
+            accentColor: .systemPurple                        // Your favorite color
         )
 
         //
