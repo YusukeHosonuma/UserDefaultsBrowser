@@ -21,6 +21,7 @@
 		70A4A523282519B7007F2033 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A4A511282519B7007F2033 /* Assets.xcassets */; };
 		70A4A524282519B7007F2033 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A4A511282519B7007F2033 /* Assets.xcassets */; };
 		70A4A53228251B1D007F2033 /* UserDefaultsBrowser in Frameworks */ = {isa = PBXBuildFile; productRef = 70A4A53128251B1D007F2033 /* UserDefaultsBrowser */; };
+		70F03A912826266600D86CAB /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A902826266600D86CAB /* BrowserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		70A4A51E282519B7007F2033 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		70A4A52E28251A19007F2033 /* UserDefaults-Browser */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "UserDefaults-Browser"; path = ..; sourceTree = "<group>"; };
 		70A4A52F28251AB3007F2033 /* iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS.entitlements; sourceTree = "<group>"; };
+		70F03A902826266600D86CAB /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				707790AE2825628500A851C7 /* AppDelegate.swift */,
 				707790B02825628500A851C7 /* SceneDelegate.swift */,
 				707790B22825628500A851C7 /* ViewController.swift */,
+				70F03A902826266600D86CAB /* BrowserViewController.swift */,
 				707790B42825628500A851C7 /* Main.storyboard */,
 				707790B72825628600A851C7 /* Assets.xcassets */,
 				707790B92825628600A851C7 /* LaunchScreen.storyboard */,
@@ -285,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				707790B32825628500A851C7 /* ViewController.swift in Sources */,
+				70F03A912826266600D86CAB /* BrowserViewController.swift in Sources */,
 				707790AF2825628500A851C7 /* AppDelegate.swift in Sources */,
 				707790B12825628500A851C7 /* SceneDelegate.swift in Sources */,
 			);

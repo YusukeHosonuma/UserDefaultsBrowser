@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="laS-yA-sZ7">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,57 +9,76 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Browser-->
+        <scene sceneID="XXQ-JT-0Y9">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UIKitApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="WO7-EZ-zou" customClass="BrowserViewController" customModule="UIKitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rba-PZ-PzS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="rh7-er-xw3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Browser" image="externaldrive" catalog="system" id="OhW-CD-Quo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nO2-oR-MtG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1718" y="460"/>
+        </scene>
+        <!--Example-->
+        <scene sceneID="ifD-S9-Zlm">
+            <objects>
+                <viewController id="cIS-mQ-2lL" customClass="ViewController" customModule="UIKitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Uh-gF-oTu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFc-BZ-giM">
-                                <rect key="frame" x="149" y="437.5" width="116" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8o-vR-N45">
+                                <rect key="frame" x="149" y="413" width="116" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Open Browser"/>
                                 <connections>
-                                    <action selector="tapOpenBrowserButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3jM-XP-MKX"/>
+                                    <action selector="tapOpenBrowserButton:" destination="cIS-mQ-2lL" eventType="touchUpInside" id="osL-ox-XsU"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="pVM-C2-OFj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wFc-BZ-giM" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KNb-Qn-9nD"/>
-                            <constraint firstItem="wFc-BZ-giM" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="lnX-G1-woL"/>
+                            <constraint firstItem="u8o-vR-N45" firstAttribute="centerY" secondItem="pVM-C2-OFj" secondAttribute="centerY" id="GMG-fs-3at"/>
+                            <constraint firstItem="u8o-vR-N45" firstAttribute="centerX" secondItem="pVM-C2-OFj" secondAttribute="centerX" id="ejY-cw-UhL"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Example" image="swift" catalog="system" id="9Bo-LT-dXI"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="opQ-vz-0ON" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="138"/>
+            <point key="canvasLocation" x="1718" y="-147"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="2oJ-6j-WK3">
+        <!--Tab Bar Controller-->
+        <scene sceneID="sbO-Gb-9CE">
             <objects>
-                <viewController storyboardIdentifier="green" id="lnU-rL-fNj" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="arT-xA-Zww">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="t1z-ty-BaB"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xba-BF-m9o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController id="laS-yA-sZ7" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DBM-Cs-Af3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="cIS-mQ-2lL" kind="relationship" relationship="viewControllers" id="rDJ-Sr-22o"/>
+                        <segue destination="WO7-EZ-zou" kind="relationship" relationship="viewControllers" id="FLw-2d-O3A"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t3o-bR-h6I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="131"/>
+            <point key="canvasLocation" x="829" y="157"/>
         </scene>
     </scenes>
     <resources>
+        <image name="externaldrive" catalog="system" width="128" height="88"/>
+        <image name="swift" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
