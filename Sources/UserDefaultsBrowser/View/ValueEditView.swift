@@ -133,13 +133,13 @@ struct ValueEditView: View {
     @ViewBuilder
     private func valueEditor() -> some View {
         switch valueType {
-        case .bool:
-            BoolEditor(value: $valueBool)
-                .padding([.horizontal, .bottom])
-
         case .string:
             TextEditor(text: $valueString)
                 .style(.valueEditor)
+                .padding([.horizontal, .bottom])
+
+        case .bool:
+            BoolEditor(value: $valueBool)
                 .padding([.horizontal, .bottom])
 
         case .int:
@@ -217,6 +217,10 @@ struct ValueEditView: View {
         let value = defaults.lookup(forKey: key)
 
         switch value {
+        case let value as String:
+            valueType = .string
+            valueString = value
+
         case let value as Bool:
             valueType = .bool
             valueBool = value
@@ -233,9 +237,13 @@ struct ValueEditView: View {
             valueType = .double
             valueDouble = value
 
-        case let value as String:
-            valueType = .string
-            valueString = value
+        case let value as URL:
+            valueType = .url
+            valueURL = value
+
+        case let value as Date:
+            valueType = .date
+            valueDate = value
 
         case let value as [Any]:
             valueType = .array
@@ -254,26 +262,9 @@ struct ValueEditView: View {
             valueJSONString = value
 
         default:
-            //
-            // 💡 Note:
-            // The `URL` type was stored by encoded `Data`.
-            // Therefore must use `url(forKey:)`.
-            //
-            if let url = defaults.url(forKey: key) {
-                valueType = .url
-                valueURL = url
-            } else {
-                let object = defaults.object(forKey: key)
-
-                switch object {
-                case let value as Date:
-                    valueType = .date
-                    valueDate = value
-                default:
-                    valueType = .unknown
-                    print("type: \(String(describing: object.self))")
-                }
-            }
+            let object = defaults.object(forKey: key)
+            valueType = .unknown
+            print("type: \(String(describing: object.self))")
         }
     }
 
