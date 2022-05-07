@@ -72,6 +72,12 @@ struct ExampleApp: App {
             let data = try! JSONEncoder().encode(user)
             standard.set(data, forKey: "user")
 
+            let pngData = UIImage(systemName: "swift")!.pngData()!
+            standard.set(pngData, forKey: "imagePngData")
+
+            let jpegData = UIImage(named: "picture")!.jpegData(compressionQuality: 0.7)!
+            standard.set(jpegData, forKey: "imageJpegData")
+
             //
             // AppGroup
             //

@@ -37,7 +37,7 @@
 		70A4A50F282519B5007F2033 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		70A4A510282519B6007F2033 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		70A4A511282519B7007F2033 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		70A4A516282519B7007F2033 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		70A4A516282519B7007F2033 /* SwiftUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A4A51C282519B7007F2033 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A4A51E282519B7007F2033 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		70A4A52E28251A19007F2033 /* UserDefaults-Browser */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "UserDefaults-Browser"; path = ..; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		70A4A517282519B7007F2033 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				70A4A516282519B7007F2033 /* Example.app */,
+				70A4A516282519B7007F2033 /* SwiftUIExample.app */,
 				70A4A51C282519B7007F2033 /* Example.app */,
 				707790AC2825628500A851C7 /* UIKitApp.app */,
 			);
@@ -192,7 +192,7 @@
 				70A4A53128251B1D007F2033 /* UserDefaultsBrowser */,
 			);
 			productName = "Example (iOS)";
-			productReference = 70A4A516282519B7007F2033 /* Example.app */;
+			productReference = 70A4A516282519B7007F2033 /* SwiftUIExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		70A4A51B282519B7007F2033 /* Example (macOS) */ = {
@@ -345,6 +345,7 @@
 				DEVELOPMENT_TEAM = P437HSA6PY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UIKitApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = UIKitExample;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -376,6 +377,7 @@
 				DEVELOPMENT_TEAM = P437HSA6PY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UIKitApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = UIKitExample;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -529,7 +531,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.penginmura.Example;
-				PRODUCT_NAME = Example;
+				PRODUCT_NAME = SwiftUIExample;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -560,7 +562,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.penginmura.Example;
-				PRODUCT_NAME = Example;
+				PRODUCT_NAME = SwiftUIExample;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

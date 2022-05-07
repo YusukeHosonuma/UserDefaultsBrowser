@@ -8,6 +8,37 @@
 import SwiftPrettyPrint
 import SwiftUI
 
+private enum Value {
+    case text(String)
+    case decodedJSON(String, String)
+    case image(UIImage)
+
+    var isEditable: Bool {
+        if case .image = self {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    var exportString: String {
+        switch self {
+        case let .text(text):
+            return text
+
+        case let .decodedJSON(text, message):
+            return
+                """
+                \(text)
+                \(message)
+                """
+
+        case .image:
+            return "<Image Data>"
+        }
+    }
+}
+
 struct RowView: View {
     @Environment(\.customAccentColor) private var customAccentColor
 
@@ -23,7 +54,7 @@ struct RowView: View {
 
     @State private var isPresentedEditSheet = false
 
-    private var value: (pretty: String, raw: String?) {
+    private var value: Value {
         let value = defaults.lookup(forKey: key)
 
         switch value {
@@ -33,45 +64,32 @@ struct RowView: View {
         // Because editor of `[String: Any]` is input as JSON.
         //
         case let value as [Any]:
-            return (value.prettyJSON, nil)
+            return .text(value.prettyJSON)
         case let value as [String: Any]:
-            return (value.prettyJSON, nil)
+            return .text(value.prettyJSON)
         case let value as JSONData:
-            return (value.dictionary.prettyJSON, "<Decoded JSON Data>")
+            return .decodedJSON(value.dictionary.prettyJSON, "<Decoded JSON Data>")
         case let value as JSONString:
-            return (value.dictionary.prettyJSON, "<Decoded JSON String>")
-
+            return .decodedJSON(value.dictionary.prettyJSON, "<Decoded JSON String>")
+        case let value as UIImage:
+            return .image(value)
         default:
-            return (prettyString(value), nil)
+            return .text(prettyString(value))
         }
     }
 
     private var exportString: String {
         """
 
-        \(key)
-
-        \(value.pretty + (value.raw.map { "\n" + $0 } ?? ""))
+        \(key):
+        \(value.exportString)
         """
     }
 
     var body: some View {
         GroupBox {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(value.pretty)
-                    if let raw = value.raw {
-                        Text(raw)
-                            .foregroundColor(.gray)
-                            .padding(.top, 2)
-                    }
-                }
-                Spacer()
-            }
-            .lineLimit(nil)
-            .fixedSize(horizontal: false, vertical: true)
-            .font(.codeStyle)
-            .padding(.top, 2)
+            content()
+                .padding(.top, 2)
         } label: {
             HStack {
                 Text(key)
@@ -90,6 +108,7 @@ struct RowView: View {
                     } label: {
                         Image(systemName: "pencil")
                     }
+                    .enabled(value.isEditable)
 
                     //
                     // 􀩼 Console
@@ -119,6 +138,39 @@ struct RowView: View {
                 //
                 .accentColor(customAccentColor)
         }
+    }
+
+    @ViewBuilder
+    func content() -> some View {
+        HStack {
+            switch value {
+            case let .text(text):
+                Text(text)
+
+            case let .decodedJSON(text, message):
+                VStack(alignment: .leading) {
+                    Text(text)
+                    Text(message)
+                        .foregroundColor(.gray)
+                        .padding(.top, 2)
+                }
+
+            case let .image(uiImage):
+                if uiImage.size.width < 200 {
+                    Image(uiImage: uiImage)
+                } else {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200)
+                }
+            }
+
+            Spacer()
+        }
+        .lineLimit(nil)
+        .fixedSize(horizontal: false, vertical: true)
+        .font(.codeStyle)
     }
 }
 
