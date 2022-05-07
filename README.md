@@ -85,7 +85,7 @@ class ViewController: UIViewController { // 💡 Your root ViewController.
 
 ## Configuration
 
-Both SwiftUI and UIKit have the same options.
+Both SwiftUI and UIKit have the same options like follows.
 
 ```swift
 UserDefaultsBrowserContainer(
@@ -94,9 +94,7 @@ UserDefaultsBrowserContainer(
     accentColor: .orange,                             // Your favorite color (`UIColor` type in UIKit-based API)
     imageName: "wrench.and.screwdriver",              // SFSymbols name
     displayStyle: .fullScreen                         // `.sheet` or `.fullScreen`
-) {
-    ContentView()
-}
+)
 ```
 
 ## Add to some View or ViewController
