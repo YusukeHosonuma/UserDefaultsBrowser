@@ -1,61 +1,124 @@
 # UserDefaultsBrowser
 
-A description of this package.
+Browse and edit [UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults) on your app.
 
-## SwiftUI
+## Supported types
 
-T.B.D
+- [Property List Types](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/PropertyList.html)
+  - [x] `Array`
+  - [x] `Dictionary`
+  - [x] `String`
+  - [x] `Date`
+  - [x] `Int`
+  - [x] `Float`
+  - [x] `Double`
+  - [x] `Bool`
+- Other
+  - [x] `URL`
+  - [x] `UIImage` (Read-only)
+- JSON encoded
+  - [x] `Data`
+  - [x] `String`
 
-## UIKit
+[AppGroups](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups) (`UserDefaults(suiteName: "group.xxx")`) is also supported, please see [Configurations](#Configurations).
 
-### Add Launcher Icon
+## Quick Start
+
+Add `https://github.com/YusukeHosonuma/UserDefaultsBrowser` in the Xcode or `Package.swift`:
+
+```swift
+let package = Package(
+    dependencies: [
+        .package(url: "https://github.com/YusukeHosonuma/UserDefaultsBrowser", from: "xxx"),
+    ],
+    targets: [
+        .target(name: "<your-target-name>", dependencies: [
+             "UserDefaultsBrowser",
+        ]),
+    ]
+)
+```
+
+### SwiftUI
+
+Surround the root view with `UserDefaultsBrowserContainer`.
 
 ```swift
 import UserDefaultsBrowser
 
-class ViewController: UIViewController { // Your root ViewController
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //
-        // ✅ All arguments are optional.
-        //
-        UserDefaultsBrowser.setupUserDefaultsBrowserLauncher(
-            suiteNames: ["group.xxx"],                        // AppGroups IDs
-            excludeKeys: { $0.hasPrefix("not-display-key") }, // Exclude keys
-            accentColor: .systemPurple,                       // Your favorite color
-            imageName: "wrench.and.screwdriver",              // SFSymbols name
-            displayStyle: .fullScreen                         // `.sheet` or `.fullScreen`
-        )
+@main
+struct ExampleApp: App {
+    var body: some Scene {
+        WindowGroup {
+            UserDefaultsBrowserContainer {
+                ContentView() // 💡 Your root view.
+            }
+        }
     }
 }
 ```
 
-<img width="250" alt="image" src="https://user-images.githubusercontent.com/2990285/167238791-e15f66d4-0f03-4503-a9fd-141c55f60bfa.png">
+### UIKit
 
-### Add Browser to ViewController
+Call `setupUserDefaultsBrowserLauncher` in `viewDidLoad` of your root ViewController.
 
-For example:
+```swift
+import UserDefaultsBrowser
+
+class ViewController: UIViewController { // 💡 Your root ViewController.
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        UserDefaultsBrowser.setupUserDefaultsBrowserLauncher()
+    }
+}
+```
+
+## Configuration
+
+Both SwiftUI and UIKit have the same options.
+
+```swift
+UserDefaultsBrowserContainer(
+    suiteNames: ["group.xxx"],                        // AppGroups IDs
+    excludeKeys: { $0.hasPrefix("not-display-key") }, // Exclude keys
+    accentColor: .orange,                             // Your favorite color (`UIColor` type in UIKit-based API)
+    imageName: "wrench.and.screwdriver",              // SFSymbols name
+    displayStyle: .fullScreen                         // `.sheet` or `.fullScreen`
+) {
+    ContentView()
+}
+```
+
+## Add to some View or ViewController
+
+For example, for tab-based applications, it is useful to have a tab for browsing.
+
+### SwiftUI
+
+```swift
+var body: some View {
+    TabView {
+        ...
+        UserDefaultsBrowserView()
+            .tabItem {
+                Label("Browser", systemImage: "externaldrive")
+            }
+    }
+}
+```
+
+### UIKit
 
 ```swift
 class TabItemViewController: UIViewController {
     override func viewDidLoad() {
-        //
-        // ✅ All arguments are optional.
-        //
-        let vc = UserDefaultsBrowserViewController(
-            suiteNames: ["group.xxx"],                        // AppGroups IDs
-            excludeKeys: { $0.hasPrefix("not-display-key") }, // Exclude keys
-            accentColor: .systemPurple                        // Your favorite color
-        )
-
-        //
-        // 💡 Add your view. (for example)
-        //
+        let vc = UserDefaultsBrowserViewController()
         addChild(vc)
         view.addSubview(vc.view)
         vc.didMove(toParent: self)
+        
         vc.view.translatesAutoresizingMaskIntoConstraints = false
         vc.view.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
         vc.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
@@ -65,4 +128,14 @@ class TabItemViewController: UIViewController {
 }
 ```
 
-<img width="250" alt="image" src="https://user-images.githubusercontent.com/2990285/167238851-b287e307-5482-49d4-a2ec-05bef78269cd.png">
+## Requirements
+
+- iOS 14+
+
+## Contributions
+
+Issues and PRs are welcome, even for minor improvements and corrections.
+
+## Author
+
+Yusuke Hosonuma / [@tobi462](https://twitter.com/tobi462)
