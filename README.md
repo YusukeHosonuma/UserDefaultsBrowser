@@ -11,7 +11,7 @@ Browse and edit [UserDefaults](https://developer.apple.com/documentation/foundat
 We recommend to use [SwiftUI-Simulator](https://github.com/YusukeHosonuma/SwiftUI-Simulator), if you use it in an app built with SwiftUI.<br>
 (This feature is also included)
 
-## Supported types
+## Supported Types
 
 - [Property List Types](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/PropertyList.html)
   - [x] `Array`
