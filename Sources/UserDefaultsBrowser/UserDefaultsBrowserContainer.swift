@@ -8,11 +8,6 @@
 import SwiftUI
 
 public struct UserDefaultsBrowserContainer<Content: View>: View {
-    public enum DisplayStyle {
-        case sheet
-        case fullScreen
-    }
-
     private let suiteNames: [String]
     private let excludeKeys: (String) -> Bool
     private let accentColor: Color
