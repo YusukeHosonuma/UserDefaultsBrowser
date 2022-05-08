@@ -34,7 +34,7 @@ We recommend to use [SwiftUI-Simulator](https://github.com/YusukeHosonuma/SwiftU
 
 ## Quick Start
 
-Add `https://github.com/YusukeHosonuma/UserDefaultsBrowser` in the Xcode or `Package.swift`:
+1. Add `https://github.com/YusukeHosonuma/UserDefaultsBrowser` in the Xcode or `Package.swift`:
 
 ```swift
 let package = Package(
@@ -49,9 +49,9 @@ let package = Package(
 )
 ```
 
-### SwiftUI
+2. Setup launcher button.
 
-Surround the root view with `UserDefaultsBrowserContainer`.
+**SwiftUI:** Surround the root view with `UserDefaultsBrowserContainer`.
 
 ```swift
 import UserDefaultsBrowser
@@ -68,9 +68,7 @@ struct ExampleApp: App {
 }
 ```
 
-### UIKit
-
-Call `setupUserDefaultsBrowserLauncher` in `viewDidLoad` of your root ViewController.
+**UIKit:** Call `setupUserDefaultsBrowserLauncher` in `viewDidLoad` of your root ViewController.
 
 ```swift
 import UserDefaultsBrowser
@@ -84,6 +82,10 @@ class ViewController: UIViewController { // 💡 Your root ViewController.
     }
 }
 ```
+
+3. Tap launcher button at leading bottom.
+
+![image](https://user-images.githubusercontent.com/2990285/167282686-e53f6621-d6d5-47bb-9f77-e62de33a41f3.png)
 
 ## Configuration
 
