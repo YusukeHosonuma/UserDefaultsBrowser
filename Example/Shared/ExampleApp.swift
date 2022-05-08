@@ -78,6 +78,9 @@ struct ExampleApp: App {
             let jpegData = UIImage(named: "picture")!.jpegData(compressionQuality: 0.7)!
             standard.set(jpegData, forKey: "imageJpegData")
 
+            let stringData = "https://github.com/YusukeHosonuma/UserDefaultsBrowser".data(using: .utf8)!
+            standard.set(stringData, forKey: "stringData")
+            
             //
             // AppGroup
             //

@@ -12,6 +12,7 @@ private enum Value {
     case text(String)
     case decodedJSON(String, String)
     case image(UIImage)
+    case data(String)
 
     var isEditable: Bool {
         if case .image = self {
@@ -35,6 +36,9 @@ private enum Value {
 
         case .image:
             return "<Image Data>"
+
+        case let .data(text):
+            return text
         }
     }
 }
@@ -73,6 +77,8 @@ struct RowView: View {
             return .decodedJSON(value.dictionary.prettyJSON, "<Decoded JSON String>")
         case let value as UIImage:
             return .image(value)
+        case _ as Data:
+            return .data(prettyString(value))
         default:
             return .text(prettyString(value))
         }
@@ -143,29 +149,35 @@ struct RowView: View {
     @ViewBuilder
     func content() -> some View {
         HStack {
-            switch value {
-            case let .text(text):
-                Text(text)
-
-            case let .decodedJSON(text, message):
-                VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                switch value {
+                case let .text(text):
+                    Text(text)
+                    
+                case let .decodedJSON(text, message):
                     Text(text)
                     Text(message)
                         .foregroundColor(.gray)
                         .padding(.top, 2)
-                }
-
-            case let .image(uiImage):
-                if uiImage.size.width < 200 {
-                    Image(uiImage: uiImage)
-                } else {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
+                    
+                case let .image(uiImage):
+                    if uiImage.size.width < 200 {
+                        Image(uiImage: uiImage)
+                    } else {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200)
+                    }
+                    
+                case let .data(text):
+                    Text(text)
+                        .lineLimit(1)
+                    Text("<Data>")
+                        .foregroundColor(.gray)
+                        .padding(.top, 2)
                 }
             }
-
             Spacer()
         }
         .lineLimit(nil)
