@@ -37,7 +37,7 @@ public struct UserDefaultsBrowserContainer<Content: View>: View {
     public var body: some View {
         ZStack(alignment: .bottomLeading) {
             content()
-            
+
             Button {
                 isPresentedSheet.toggle()
             } label: {

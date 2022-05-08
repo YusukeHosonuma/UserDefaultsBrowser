@@ -31,7 +31,7 @@ private enum Value {
 
         case let .url(url):
             return url.absoluteString
-            
+
         case let .decodedJSON(text, message):
             return
                 """
@@ -168,16 +168,16 @@ struct RowView: View {
                 switch value {
                 case let .text(text):
                     Text(text)
-                    
+
                 case let .decodedJSON(text, message):
                     Text(text)
                     Text(message)
                         .foregroundColor(.gray)
                         .padding(.top, 2)
-                
+
                 case let .url(url):
                     Link(url.absoluteString, destination: url)
-                    
+
                 case let .image(uiImage):
                     if uiImage.size.width < 200 {
                         Image(uiImage: uiImage)
@@ -187,7 +187,7 @@ struct RowView: View {
                             .scaledToFit()
                             .frame(width: 200)
                     }
-                
+
                 case let .data(text):
                     Text(text)
                         .lineLimit(1)
