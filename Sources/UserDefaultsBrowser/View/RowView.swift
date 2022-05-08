@@ -116,16 +116,6 @@ struct RowView: View {
 
                 Group {
                     //
-                    // 􀈊 Edit
-                    //
-                    Button {
-                        isPresentedEditSheet.toggle()
-                    } label: {
-                        Image(systemName: "pencil")
-                    }
-                    .enabled(value.isEditable)
-
-                    //
                     // 􀩼 Console
                     //
                     Button {
@@ -133,6 +123,7 @@ struct RowView: View {
                     } label: {
                         Image(systemName: "terminal")
                     }
+                    .padding(.trailing, 2)
 
                     //
                     // 􀉁 Copy
@@ -142,8 +133,19 @@ struct RowView: View {
                     } label: {
                         Image(systemName: "doc.on.doc")
                     }
+                    .padding(.trailing, 2)
+
+                    //
+                    // 􀈊 Edit
+                    //
+                    Button {
+                        isPresentedEditSheet.toggle()
+                    } label: {
+                        Image(systemName: "pencil")
+                    }
+                    .enabled(value.isEditable)
                 }
-                .font(.system(size: 14, weight: .regular))
+                .font(.system(size: 16, weight: .regular))
             }
         }
         .sheet(isPresented: $isPresentedEditSheet, onDismiss: { onUpdate() }) {
