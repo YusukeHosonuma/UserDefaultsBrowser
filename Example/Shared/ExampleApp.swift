@@ -12,7 +12,7 @@ let groupID = "group.UserDefaultsBrowser"
 
 @main
 struct ExampleApp: App {
-    @AppStorage("isFirstLaunch") private var isFirstLaunch = true
+    @AppStorage("isFirstLaunched") private var isFirstLaunched = false
 
     init() {
         setupExampleData()
@@ -23,7 +23,7 @@ struct ExampleApp: App {
             UserDefaultsBrowserContainer(
                 suiteNames: [groupID],
                 excludeKeys: { $0.hasPrefix("not-display-key") },
-                accentColor: .red,
+                accentColor: .orange,
                 imageName: "wrench.and.screwdriver",
                 displayStyle: .fullScreen
             ) {
@@ -35,8 +35,8 @@ struct ExampleApp: App {
     // MARK: Private
 
     private func setupExampleData() {
-        if isFirstLaunch {
-            defer { isFirstLaunch = false }
+        if isFirstLaunched == false {
+            defer { isFirstLaunched = true }
 
             struct User: Codable {
                 let name: String
@@ -82,7 +82,7 @@ struct ExampleApp: App {
 
             let stringData = "https://github.com/YusukeHosonuma/UserDefaultsBrowser".data(using: .utf8)!
             standard.set(stringData, forKey: "stringData")
-            
+
             //
             // AppGroup
             //

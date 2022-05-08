@@ -75,15 +75,11 @@
 		707790AD2825628500A851C7 /* UIKitApp */ = {
 			isa = PBXGroup;
 			children = (
-				707790C228256C9F00A851C7 /* UIKitApp.entitlements */,
+				70A5B35328278206004E31B7 /* Resources */,
 				707790AE2825628500A851C7 /* AppDelegate.swift */,
 				707790B02825628500A851C7 /* SceneDelegate.swift */,
 				707790B22825628500A851C7 /* ViewController.swift */,
 				70F03A902826266600D86CAB /* BrowserViewController.swift */,
-				707790B42825628500A851C7 /* Main.storyboard */,
-				707790B72825628600A851C7 /* Assets.xcassets */,
-				707790B92825628600A851C7 /* LaunchScreen.storyboard */,
-				707790BC2825628600A851C7 /* Info.plist */,
 			);
 			path = UIKitApp;
 			sourceTree = "<group>";
@@ -150,6 +146,18 @@
 				70A4A52F28251AB3007F2033 /* iOS.entitlements */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		70A5B35328278206004E31B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				707790B42825628500A851C7 /* Main.storyboard */,
+				707790B92825628600A851C7 /* LaunchScreen.storyboard */,
+				707790B72825628600A851C7 /* Assets.xcassets */,
+				707790BC2825628600A851C7 /* Info.plist */,
+				707790C228256C9F00A851C7 /* UIKitApp.entitlements */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,12 +347,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = UIKitApp/UIKitApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = UIKitApp/Resources/UIKitApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P437HSA6PY;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = UIKitApp/Info.plist;
+				INFOPLIST_FILE = UIKitApp/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = UIKitExample;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -371,12 +379,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = UIKitApp/UIKitApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = UIKitApp/Resources/UIKitApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P437HSA6PY;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = UIKitApp/Info.plist;
+				INFOPLIST_FILE = UIKitApp/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = UIKitExample;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
