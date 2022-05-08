@@ -82,6 +82,8 @@ struct RowView: View {
             return .decodedJSON(value.dictionary.prettyJSON, "<Decoded JSON String>")
         case let value as UIImage:
             return .image(value)
+        case let value as Date:
+            return .text(value.toString())
         case let value as URL:
             return .url(value)
         case _ as Data:
