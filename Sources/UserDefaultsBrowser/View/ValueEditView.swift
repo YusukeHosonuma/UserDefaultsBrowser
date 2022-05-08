@@ -98,6 +98,10 @@ struct ValueEditView: View {
                     }
                 }
                 ToolbarItem(placement: .bottomBar) {
+                    //
+                    // ⚠️ SwiftUI Bug: Not align to trailing on iPhone XS (15.4.1) of real-device.
+                    // (No problem in the simulator)
+                    //
                     HStack {
                         Spacer()
                         Button {
