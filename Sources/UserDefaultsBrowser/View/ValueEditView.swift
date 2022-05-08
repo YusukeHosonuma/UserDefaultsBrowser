@@ -269,7 +269,7 @@ struct ValueEditView: View {
     }
 
     private func save() {
-        func write<T>(_ value: T) {
+        func write<T>(_ value: T?) {
             defaults.set(value, forKey: key)
         }
 
@@ -290,7 +290,12 @@ struct ValueEditView: View {
             write(valueDouble)
 
         case .url:
-            write(valueURL)
+            //
+            // ⚠️ This code cause crash, why?
+            //
+            // write(valueURL)
+            //
+            defaults.set(valueURL, forKey: key)
 
         case .date:
             write(valueDate)
