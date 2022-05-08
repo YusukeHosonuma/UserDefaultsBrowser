@@ -73,9 +73,13 @@ struct RowView: View {
         // Because editor of `[String: Any]` is input as JSON.
         //
         case let value as [Any]:
-            return .text(value.prettyJSON)
+            return .text(
+                value.isEmpty ? "[]" : value.prettyJSON
+            )
         case let value as [String: Any]:
-            return .text(value.prettyJSON)
+            return .text(
+                value.isEmpty ? "{}" : value.prettyJSON
+            )
         case let value as JSONData:
             return .decodedJSON(value.dictionary.prettyJSON, "<Decoded JSON Data>")
         case let value as JSONString:

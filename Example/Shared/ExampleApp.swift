@@ -54,7 +54,9 @@ struct ExampleApp: App {
             standard.set(7.5, forKey: "number")
             standard.set(URL(string: "https://github.com/YusukeHosonuma/UserDefaultsBrowser")!, forKey: "url")
             standard.set(Date(), forKey: "date")
+            standard.set([String](), forKey: "emptyArray")
             standard.set(["Apple", "Orange"], forKey: "array")
+            standard.set([String: Any](), forKey: "emptyDictionary")
             standard.set([
                 "int": 42,
                 "float": Float(3.14),
