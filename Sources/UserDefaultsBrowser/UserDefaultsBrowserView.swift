@@ -105,7 +105,7 @@ public struct UserDefaultsBrowserView: View {
                 .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
+                    ToolbarItem(placement: .primaryAction) {
                         Button("Done") {
                             presentationMode.wrappedValue.dismiss()
                         }

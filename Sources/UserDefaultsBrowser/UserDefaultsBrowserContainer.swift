@@ -37,15 +37,15 @@ public struct UserDefaultsBrowserContainer<Content: View>: View {
     public var body: some View {
         ZStack(alignment: .bottomLeading) {
             content()
-
+            
             Button {
                 isPresentedSheet.toggle()
             } label: {
                 Image(systemName: imageName)
+                    .padding()
+                    .contentShape(Rectangle())
             }
             .accentColor(accentColor)
-            .padding()
-            .contentShape(Rectangle())
         }
         .extend { parent in
             switch displayStyle {

@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             NavigationView {
-                Button("Open UserDefaultsBrowser") {
+                Button("Open Browser") {
                     isPresented.toggle()
                 }
                 .navigationTitle("Example")

@@ -98,6 +98,10 @@ struct ValueEditView: View {
                     }
                 }
                 ToolbarItem(placement: .bottomBar) {
+                    //
+                    // ⚠️ SwiftUI Bug: Not align to trailing on iPhone XS (15.4.1) of real-device.
+                    // (No problem in the simulator)
+                    //
                     HStack {
                         Spacer()
                         Button {
@@ -269,7 +273,7 @@ struct ValueEditView: View {
     }
 
     private func save() {
-        func write<T>(_ value: T) {
+        func write<T>(_ value: T?) {
             defaults.set(value, forKey: key)
         }
 
@@ -290,7 +294,12 @@ struct ValueEditView: View {
             write(valueDouble)
 
         case .url:
-            write(valueURL)
+            //
+            // ⚠️ This code cause crash, why?
+            //
+            // write(valueURL)
+            //
+            defaults.set(valueURL, forKey: key)
 
         case .date:
             write(valueDate)

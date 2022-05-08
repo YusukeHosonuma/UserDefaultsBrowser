@@ -10,13 +10,16 @@ import SwiftUI
 
 private enum Value {
     case text(String)
+    case url(URL)
     case decodedJSON(String, String)
     case image(UIImage)
+    case data(String)
 
     var isEditable: Bool {
-        if case .image = self {
+        switch self {
+        case .image, .data:
             return false
-        } else {
+        case .text, .url, .decodedJSON:
             return true
         }
     }
@@ -26,6 +29,9 @@ private enum Value {
         case let .text(text):
             return text
 
+        case let .url(url):
+            return url.absoluteString
+            
         case let .decodedJSON(text, message):
             return
                 """
@@ -35,6 +41,9 @@ private enum Value {
 
         case .image:
             return "<Image Data>"
+
+        case let .data(text):
+            return text
         }
     }
 }
@@ -64,15 +73,25 @@ struct RowView: View {
         // Because editor of `[String: Any]` is input as JSON.
         //
         case let value as [Any]:
-            return .text(value.prettyJSON)
+            return .text(
+                value.isEmpty ? "[]" : value.prettyJSON
+            )
         case let value as [String: Any]:
-            return .text(value.prettyJSON)
+            return .text(
+                value.isEmpty ? "{}" : value.prettyJSON
+            )
         case let value as JSONData:
             return .decodedJSON(value.dictionary.prettyJSON, "<Decoded JSON Data>")
         case let value as JSONString:
             return .decodedJSON(value.dictionary.prettyJSON, "<Decoded JSON String>")
         case let value as UIImage:
             return .image(value)
+        case let value as Date:
+            return .text(value.toString())
+        case let value as URL:
+            return .url(value)
+        case _ as Data:
+            return .data(prettyString(value))
         default:
             return .text(prettyString(value))
         }
@@ -101,16 +120,6 @@ struct RowView: View {
 
                 Group {
                     //
-                    // 􀈊 Edit
-                    //
-                    Button {
-                        isPresentedEditSheet.toggle()
-                    } label: {
-                        Image(systemName: "pencil")
-                    }
-                    .enabled(value.isEditable)
-
-                    //
                     // 􀩼 Console
                     //
                     Button {
@@ -118,6 +127,7 @@ struct RowView: View {
                     } label: {
                         Image(systemName: "terminal")
                     }
+                    .padding(.trailing, 2)
 
                     //
                     // 􀉁 Copy
@@ -127,8 +137,19 @@ struct RowView: View {
                     } label: {
                         Image(systemName: "doc.on.doc")
                     }
+                    .padding(.trailing, 2)
+
+                    //
+                    // 􀈊 Edit
+                    //
+                    Button {
+                        isPresentedEditSheet.toggle()
+                    } label: {
+                        Image(systemName: "pencil")
+                    }
+                    .enabled(value.isEditable)
                 }
-                .font(.system(size: 14, weight: .regular))
+                .font(.system(size: 16, weight: .regular))
             }
         }
         .sheet(isPresented: $isPresentedEditSheet, onDismiss: { onUpdate() }) {
@@ -143,29 +164,38 @@ struct RowView: View {
     @ViewBuilder
     func content() -> some View {
         HStack {
-            switch value {
-            case let .text(text):
-                Text(text)
-
-            case let .decodedJSON(text, message):
-                VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                switch value {
+                case let .text(text):
+                    Text(text)
+                    
+                case let .decodedJSON(text, message):
                     Text(text)
                     Text(message)
                         .foregroundColor(.gray)
                         .padding(.top, 2)
-                }
-
-            case let .image(uiImage):
-                if uiImage.size.width < 200 {
-                    Image(uiImage: uiImage)
-                } else {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
+                
+                case let .url(url):
+                    Link(url.absoluteString, destination: url)
+                    
+                case let .image(uiImage):
+                    if uiImage.size.width < 200 {
+                        Image(uiImage: uiImage)
+                    } else {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200)
+                    }
+                
+                case let .data(text):
+                    Text(text)
+                        .lineLimit(1)
+                    Text("<Data>")
+                        .foregroundColor(.gray)
+                        .padding(.top, 2)
                 }
             }
-
             Spacer()
         }
         .lineLimit(nil)
