@@ -1,10 +1,11 @@
 # UserDefaults-Browser
 
-Browse and edit [UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults) on your app that build with SwiftUI or UIKit.
+Browse and edit [UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults) on your app. (SwiftUI or UIKit)
 
 | Browse | Edit (as JSON) | Edit (Date) | Export |
 | -- | -- | -- | -- |
-|<img width="371" alt="image" src="https://user-images.githubusercontent.com/2990285/167252878-b249117e-cc82-46f4-a983-f200d5a0bbc7.png">|<img width="371" alt="image" src="https://user-images.githubusercontent.com/2990285/167252911-19ecbe95-91d8-406f-88a1-aae6b6ade73a.png">|<img width="371" alt="image" src="https://user-images.githubusercontent.com/2990285/167252933-a024d34f-8442-4105-b1cc-fd6558209a81.png">|<img width="371" alt="image" src="https://user-images.githubusercontent.com/2990285/167252960-b33a9c62-f38d-46fd-a518-874dcf21aad5.png">|
+|<img width="415" alt="image" src="https://user-images.githubusercontent.com/2990285/167282478-3d4c17bf-40fd-47fd-bc1e-647002f9b7dc.png">|<img width="415" alt="image" src="https://user-images.githubusercontent.com/2990285/167282487-da0de277-917e-4032-8f7d-b027c0ea1690.png">|<img width="415" alt="image" src="https://user-images.githubusercontent.com/2990285/167282490-0281e64a-9b9f-44e7-bfea-f9f27772aeae.png">|<img width="415" alt="image" src="https://user-images.githubusercontent.com/2990285/167282492-034ccd01-742b-49b6-ab65-7492ebc34984.png">|
+
 
 **Note:**
 
@@ -38,7 +39,7 @@ Add `https://github.com/YusukeHosonuma/UserDefaultsBrowser` in the Xcode or `Pac
 ```swift
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/YusukeHosonuma/UserDefaultsBrowser", from: "xxx"),
+        .package(url: "https://github.com/YusukeHosonuma/UserDefaultsBrowser", from: "1.0.0"),
     ],
     targets: [
         .target(name: "<your-target-name>", dependencies: [
