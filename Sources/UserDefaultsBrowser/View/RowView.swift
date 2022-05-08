@@ -10,6 +10,7 @@ import SwiftUI
 
 private enum Value {
     case text(String)
+    case url(URL)
     case decodedJSON(String, String)
     case image(UIImage)
     case data(String)
@@ -27,6 +28,9 @@ private enum Value {
         case let .text(text):
             return text
 
+        case let .url(url):
+            return url.absoluteString
+            
         case let .decodedJSON(text, message):
             return
                 """
@@ -77,6 +81,8 @@ struct RowView: View {
             return .decodedJSON(value.dictionary.prettyJSON, "<Decoded JSON String>")
         case let value as UIImage:
             return .image(value)
+        case let value as URL:
+            return .url(value)
         case _ as Data:
             return .data(prettyString(value))
         default:
@@ -159,6 +165,9 @@ struct RowView: View {
                     Text(message)
                         .foregroundColor(.gray)
                         .padding(.top, 2)
+                
+                case let .url(url):
+                    Link(url.absoluteString, destination: url)
                     
                 case let .image(uiImage):
                     if uiImage.size.width < 200 {
@@ -169,7 +178,7 @@ struct RowView: View {
                             .scaledToFit()
                             .frame(width: 200)
                     }
-                    
+                
                 case let .data(text):
                     Text(text)
                         .lineLimit(1)
