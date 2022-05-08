@@ -16,9 +16,10 @@ private enum Value {
     case data(String)
 
     var isEditable: Bool {
-        if case .image = self {
+        switch self {
+        case .image, .data:
             return false
-        } else {
+        case .text, .url, .decodedJSON:
             return true
         }
     }
