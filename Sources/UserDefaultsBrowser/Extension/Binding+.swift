@@ -26,7 +26,7 @@ extension Binding {
     //
     // `Binding<Enum>` -> `Binding<AssociatedValue>?`
     //
-    func caseBinding<RawValue>(_ path: CasePath<Value, RawValue>) -> Binding<RawValue>? {
+    func `case`<RawValue>(_ path: CasePath<Value, RawValue>) -> Binding<RawValue>? {
         if let value = path.extract(from: wrappedValue) {
             return .init(
                 get: { value },

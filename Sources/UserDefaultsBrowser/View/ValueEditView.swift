@@ -134,59 +134,59 @@ struct ValueEditView: View {
     private func valueEditor() -> some View {
         switch value {
         case .string:
-            if let binding = $value.caseBinding(/ValueType.string) {
+            if let binding = $value.case(/ValueType.string) {
                 TextEditor(text: binding)
                     .style(.valueEditor)
                     .padding([.horizontal, .bottom])
             }
 
         case .bool:
-            if let binding = $value.caseBinding(/ValueType.bool) {
+            if let binding = $value.case(/ValueType.bool) {
                 BoolEditor(value: binding)
                     .padding([.horizontal, .bottom])
             }
 
         case .int:
-            if let binding = $value.caseBinding(/ValueType.int) {
+            if let binding = $value.case(/ValueType.int) {
                 StringRepresentableEditor(binding, isValid: $isValid)
             }
 
         case .float:
-            if let binding = $value.caseBinding(/ValueType.float) {
+            if let binding = $value.case(/ValueType.float) {
                 StringRepresentableEditor(binding, isValid: $isValid)
             }
 
         case .double:
-            if let binding = $value.caseBinding(/ValueType.double) {
+            if let binding = $value.case(/ValueType.double) {
                 StringRepresentableEditor(binding, isValid: $isValid)
             }
 
         case .url:
-            if let binding = $value.caseBinding(/ValueType.url) {
+            if let binding = $value.case(/ValueType.url) {
                 StringRepresentableEditor(binding, isValid: $isValid, style: .multiline)
             }
 
         case .date:
-            if let binding = $value.caseBinding(/ValueType.date) {
+            if let binding = $value.case(/ValueType.date) {
                 DateEditor(date: binding, isValid: $isValid)
             }
 
         case .array:
-            if let binding = $value.caseBinding(/ValueType.array) {
+            if let binding = $value.case(/ValueType.array) {
                 jsonEditor(
                     binding.map(get: ArrayWrapper.init, set: { $0.array })
                 )
             }
 
         case .dictionary:
-            if let binding = $value.caseBinding(/ValueType.dictionary) {
+            if let binding = $value.case(/ValueType.dictionary) {
                 jsonEditor(
                     binding.map(get: DictionaryWrapper.init, set: { $0.dictionary })
                 )
             }
 
         case .jsonData:
-            if let binding = $value.caseBinding(/ValueType.jsonData) {
+            if let binding = $value.case(/ValueType.jsonData) {
                 jsonEditor(
                     binding.map(
                         get: { DictionaryWrapper($0.dictionary) },
@@ -196,7 +196,7 @@ struct ValueEditView: View {
             }
 
         case .jsonString:
-            if let binding = $value.caseBinding(/ValueType.jsonString) {
+            if let binding = $value.case(/ValueType.jsonString) {
                 jsonEditor(
                     binding.map(
                         get: { DictionaryWrapper($0.dictionary) },
@@ -232,41 +232,41 @@ struct ValueEditView: View {
     private func load() {
         switch defaults.lookup(forKey: key) {
         case let v as String:
-            self.value = .string(v)
+            value = .string(v)
 
         case let v as Bool:
-            self.value = .bool(v)
+            value = .bool(v)
 
         case let v as Int:
-            self.value = .int(v)
+            value = .int(v)
 
         case let v as Float:
-            self.value = .float(v)
+            value = .float(v)
 
         case let v as Double:
-            self.value = .double(v)
+            value = .double(v)
 
         case let v as URL:
-            self.value = .url(v)
+            value = .url(v)
 
         case let v as Date:
-            self.value = .date(v)
+            value = .date(v)
 
         case let v as [Any]:
-            self.value = .array(v)
+            value = .array(v)
 
         case let v as [String: Any]:
-            self.value = .dictionary(v)
+            value = .dictionary(v)
 
         case let v as JSONData:
-            self.value = .jsonData(v)
+            value = .jsonData(v)
 
         case let v as JSONString:
-            self.value = .jsonString(v)
+            value = .jsonString(v)
 
         default:
             let object = defaults.object(forKey: key)
-            self.value = .unknown
+            value = .unknown
             print("type: \(String(describing: object.self))")
         }
     }
