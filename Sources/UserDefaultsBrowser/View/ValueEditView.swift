@@ -64,14 +64,14 @@ struct ValueEditView: View {
         self.key = key
     }
 
-    @State private var valueType: ValueType = .unknown
+    @State private var value: ValueType = .unknown
     @State private var isValid = true
     @State private var isPresentedConfirmDelete = false
 
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                Text("\(key): \(valueType.typeName)")
+                Text("\(key): \(value.typeName)")
                     .font(.system(size: 14, weight: .bold, design: .monospaced))
                     .foregroundColor(.gray)
                     .padding(.horizontal)
@@ -86,7 +86,7 @@ struct ValueEditView: View {
                         save()
                         presentationMode.wrappedValue.dismiss()
                     }
-                    .disabled(valueType.isUnknown || isValid == false)
+                    .disabled(value.isUnknown || isValid == false)
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -132,61 +132,61 @@ struct ValueEditView: View {
 
     @ViewBuilder
     private func valueEditor() -> some View {
-        switch valueType {
+        switch value {
         case .string:
-            if let binding = $valueType.caseBinding(/ValueType.string) {
+            if let binding = $value.caseBinding(/ValueType.string) {
                 TextEditor(text: binding)
                     .style(.valueEditor)
                     .padding([.horizontal, .bottom])
             }
 
         case .bool:
-            if let binding = $valueType.caseBinding(/ValueType.bool) {
+            if let binding = $value.caseBinding(/ValueType.bool) {
                 BoolEditor(value: binding)
                     .padding([.horizontal, .bottom])
             }
 
         case .int:
-            if let binding = $valueType.caseBinding(/ValueType.int) {
+            if let binding = $value.caseBinding(/ValueType.int) {
                 StringRepresentableEditor(binding, isValid: $isValid)
             }
 
         case .float:
-            if let binding = $valueType.caseBinding(/ValueType.float) {
+            if let binding = $value.caseBinding(/ValueType.float) {
                 StringRepresentableEditor(binding, isValid: $isValid)
             }
 
         case .double:
-            if let binding = $valueType.caseBinding(/ValueType.double) {
+            if let binding = $value.caseBinding(/ValueType.double) {
                 StringRepresentableEditor(binding, isValid: $isValid)
             }
 
         case .url:
-            if let binding = $valueType.caseBinding(/ValueType.url) {
+            if let binding = $value.caseBinding(/ValueType.url) {
                 StringRepresentableEditor(binding, isValid: $isValid, style: .multiline)
             }
 
         case .date:
-            if let binding = $valueType.caseBinding(/ValueType.date) {
+            if let binding = $value.caseBinding(/ValueType.date) {
                 DateEditor(date: binding, isValid: $isValid)
             }
 
         case .array:
-            if let binding = $valueType.caseBinding(/ValueType.array) {
+            if let binding = $value.caseBinding(/ValueType.array) {
                 jsonEditor(
                     binding.map(get: ArrayWrapper.init, set: { $0.array })
                 )
             }
 
         case .dictionary:
-            if let binding = $valueType.caseBinding(/ValueType.dictionary) {
+            if let binding = $value.caseBinding(/ValueType.dictionary) {
                 jsonEditor(
                     binding.map(get: DictionaryWrapper.init, set: { $0.dictionary })
                 )
             }
 
         case .jsonData:
-            if let binding = $valueType.caseBinding(/ValueType.jsonData) {
+            if let binding = $value.caseBinding(/ValueType.jsonData) {
                 jsonEditor(
                     binding.map(
                         get: { DictionaryWrapper($0.dictionary) },
@@ -196,7 +196,7 @@ struct ValueEditView: View {
             }
 
         case .jsonString:
-            if let binding = $valueType.caseBinding(/ValueType.jsonString) {
+            if let binding = $value.caseBinding(/ValueType.jsonString) {
                 jsonEditor(
                     binding.map(
                         get: { DictionaryWrapper($0.dictionary) },
@@ -230,45 +230,43 @@ struct ValueEditView: View {
     // MARK: Load / Save
 
     private func load() {
-        let value = defaults.lookup(forKey: key)
+        switch defaults.lookup(forKey: key) {
+        case let v as String:
+            self.value = .string(v)
 
-        switch value {
-        case let value as String:
-            valueType = .string(value)
+        case let v as Bool:
+            self.value = .bool(v)
 
-        case let value as Bool:
-            valueType = .bool(value)
+        case let v as Int:
+            self.value = .int(v)
 
-        case let value as Int:
-            valueType = .int(value)
+        case let v as Float:
+            self.value = .float(v)
 
-        case let value as Float:
-            valueType = .float(value)
+        case let v as Double:
+            self.value = .double(v)
 
-        case let value as Double:
-            valueType = .double(value)
+        case let v as URL:
+            self.value = .url(v)
 
-        case let value as URL:
-            valueType = .url(value)
+        case let v as Date:
+            self.value = .date(v)
 
-        case let value as Date:
-            valueType = .date(value)
+        case let v as [Any]:
+            self.value = .array(v)
 
-        case let value as [Any]:
-            valueType = .array(value)
+        case let v as [String: Any]:
+            self.value = .dictionary(v)
 
-        case let value as [String: Any]:
-            valueType = .dictionary(value)
+        case let v as JSONData:
+            self.value = .jsonData(v)
 
-        case let value as JSONData:
-            valueType = .jsonData(value)
-
-        case let value as JSONString:
-            valueType = .jsonString(value)
+        case let v as JSONString:
+            self.value = .jsonString(v)
 
         default:
             let object = defaults.object(forKey: key)
-            valueType = .unknown
+            self.value = .unknown
             print("type: \(String(describing: object.self))")
         }
     }
@@ -278,7 +276,7 @@ struct ValueEditView: View {
             defaults.set(value, forKey: key)
         }
 
-        switch valueType {
+        switch value {
         case let .string(value):
             write(value)
 
