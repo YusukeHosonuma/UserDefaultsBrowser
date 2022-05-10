@@ -132,6 +132,9 @@ struct ValueEditView: View {
 
     @ViewBuilder
     private func valueEditor() -> some View {
+        //
+        // 💡 Note: `switch` statement is only for completeness check by compiler.
+        //
         switch value {
         case .string:
             if let binding = $value.case(/ValueType.string) {
