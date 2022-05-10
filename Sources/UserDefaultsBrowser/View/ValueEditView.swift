@@ -173,34 +173,36 @@ struct ValueEditView: View {
 
         case .array:
             if let binding = $valueType.caseBinding(/ValueType.array) {
-                jsonEditor(.init(
-                    get: { ArrayWrapper(binding.wrappedValue) },
-                    set: { binding.wrappedValue = $0.array }
-                ))
+                jsonEditor(
+                    binding.map(get: ArrayWrapper.init, set: { $0.array })
+                )
             }
 
         case .dictionary:
             if let binding = $valueType.caseBinding(/ValueType.dictionary) {
-                jsonEditor(.init(
-                    get: { DictionaryWrapper(binding.wrappedValue) },
-                    set: { binding.wrappedValue = $0.dictionary }
-                ))
+                jsonEditor(
+                    binding.map(get: DictionaryWrapper.init, set: { $0.dictionary })
+                )
             }
 
         case .jsonData:
             if let binding = $valueType.caseBinding(/ValueType.jsonData) {
-                jsonEditor(.init(
-                    get: { DictionaryWrapper(binding.wrappedValue.dictionary) },
-                    set: { binding.wrappedValue = JSONData(dictionary: $0.dictionary) }
-                ))
+                jsonEditor(
+                    binding.map(
+                        get: { DictionaryWrapper($0.dictionary) },
+                        set: { JSONData(dictionary: $0.dictionary) }
+                    )
+                )
             }
 
         case .jsonString:
             if let binding = $valueType.caseBinding(/ValueType.jsonString) {
-                jsonEditor(.init(
-                    get: { DictionaryWrapper(binding.wrappedValue.dictionary) },
-                    set: { binding.wrappedValue = JSONString(dictionary: $0.dictionary) }
-                ))
+                jsonEditor(
+                    binding.map(
+                        get: { DictionaryWrapper($0.dictionary) },
+                        set: { JSONString(dictionary: $0.dictionary) }
+                    )
+                )
             }
 
         case .unknown:
