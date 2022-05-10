@@ -13,10 +13,12 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/YusukeHosonuma/SwiftPrettyPrint.git", from: "1.3.0"),
+        .package(url: "https://github.com/pointfreeco/swift-case-paths.git", from: "0.8.0"),
     ],
     targets: [
         .target(name: "UserDefaultsBrowser", dependencies: [
             "SwiftPrettyPrint",
+            .product(name: "CasePaths", package: "swift-case-paths"),
         ]),
         .testTarget(name: "UserDefaultsBrowserTests", dependencies: ["UserDefaultsBrowser"]),
     ]

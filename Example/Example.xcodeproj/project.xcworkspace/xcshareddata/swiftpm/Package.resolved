@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "swift-case-paths",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-case-paths.git",
+      "state" : {
+        "revision" : "ce9c0d897db8a840c39de64caaa9b60119cf4be8",
+        "version" : "0.8.1"
+      }
+    },
+    {
       "identity" : "swiftparamtest",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/YusukeHosonuma/SwiftParamTest.git",
