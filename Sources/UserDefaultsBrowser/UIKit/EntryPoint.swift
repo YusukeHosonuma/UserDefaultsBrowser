@@ -16,7 +16,7 @@ private let overlayWindowSize = CGSize(width: 44, height: 44)
 public func setupUserDefaultsBrowserLauncher(
     suiteNames: [String] = [],
     excludeKeys: @escaping (String) -> Bool = { _ in false },
-    accentColor: UIColor = .blue,
+    accentColor: UIColor = .systemBlue,
     imageName: String = "externaldrive",
     displayStyle: DisplayStyle = .sheet
 ) {
