@@ -42,6 +42,7 @@
 		70A4A51E282519B7007F2033 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		70A4A52E28251A19007F2033 /* UserDefaults-Browser */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "UserDefaults-Browser"; path = ..; sourceTree = "<group>"; };
 		70A4A52F28251AB3007F2033 /* iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS.entitlements; sourceTree = "<group>"; };
+		70B1D331282C870A000D0386 /* SwiftUI-Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "SwiftUI-Common"; path = "../../SwiftUI-Common"; sourceTree = "<group>"; };
 		70F03A902826266600D86CAB /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +88,7 @@
 		70A4A509282519B5007F2033 = {
 			isa = PBXGroup;
 			children = (
+				70B1D331282C870A000D0386 /* SwiftUI-Common */,
 				70A4A52D28251A19007F2033 /* Packages */,
 				70A4A50E282519B5007F2033 /* Shared */,
 				70A4A53328251C48007F2033 /* iOS */,

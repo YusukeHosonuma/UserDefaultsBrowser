@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUICommon
 
 public struct UserDefaultsBrowserContainer<Content: View>: View {
     private let suiteNames: [String]
