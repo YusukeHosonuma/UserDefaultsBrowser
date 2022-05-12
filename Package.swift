@@ -14,11 +14,13 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/YusukeHosonuma/SwiftPrettyPrint.git", from: "1.3.0"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths.git", from: "0.8.0"),
+        .package(url: "https://github.com/YusukeHosonuma/SwiftUI-Common.git", branch: "main"),
     ],
     targets: [
         .target(name: "UserDefaultsBrowser", dependencies: [
             "SwiftPrettyPrint",
             .product(name: "CasePaths", package: "swift-case-paths"),
+            .product(name: "SwiftUICommon", package: "SwiftUI-Common"),
         ]),
         .testTarget(name: "UserDefaultsBrowserTests", dependencies: ["UserDefaultsBrowser"]),
     ]
