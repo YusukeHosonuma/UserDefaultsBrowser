@@ -179,13 +179,21 @@ struct RowView: View {
                     Link(url.absoluteString, destination: url)
 
                 case let .image(uiImage):
-                    if uiImage.size.width < 200 {
+                    //
+                    // ⚠️ Display is corrupted with iOS 14. (SwiftUI bug, maybe)
+                    //
+                    if #available(iOS 15, *) {
                         Image(uiImage: uiImage)
+                            .original(or: .fit)
                     } else {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200)
+                        if uiImage.size.width < 200 {
+                            Image(uiImage: uiImage)
+                        } else {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200)
+                        }
                     }
 
                 case let .data(text):
