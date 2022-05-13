@@ -7,6 +7,7 @@
 
 import SwiftPrettyPrint
 import SwiftUI
+import SwiftUICommon
 
 private enum Value {
     case text(String)
@@ -183,8 +184,7 @@ struct RowView: View {
                     // ⚠️ Display is corrupted with iOS 14. (SwiftUI bug, maybe)
                     //
                     if #available(iOS 15, *) {
-                        Image(uiImage: uiImage)
-                            .original(or: .fit)
+                        ResizableImage(uiImage: uiImage, contentMode: .fit)
                     } else {
                         if uiImage.size.width < 200 {
                             Image(uiImage: uiImage)
