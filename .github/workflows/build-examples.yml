@@ -16,5 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: build
-        run: xcodebuild -project Example/Example.xcodeproj -scheme "${{ matrix.scheme }}" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13,OS=latest'
+      - name: SwiftPM cache
+        uses: actions/cache@v3
+        with:
+          path: SourcePackages
+          key: ${{ runner.os }}-swiftpm-${{ hashFiles('**/Package.resolved') }}
+      - name: Build
+        run: xcodebuild -project Example/Example.xcodeproj -scheme "${{ matrix.scheme }}" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13,OS=latest' -clonedSourcePackagesDirPath SourcePackages
