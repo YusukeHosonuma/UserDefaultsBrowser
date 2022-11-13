@@ -1,7 +1,6 @@
 name: Build Examples
 
-on:
-  pull_request
+on: pull_request
 
 jobs:
   build-examples:
@@ -12,14 +11,19 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix:
-        scheme: ['Example (iOS)', 'UIKitApp']
+        scheme: ["Example (iOS)", "UIKitApp"]
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Selecct Xcode 14.1
+        run: sudo xcode-select -s '/Applications/Xcode_14.1.app/Contents/Developer'
+
       - name: SwiftPM cache
         uses: actions/cache@v3
         with:
           path: SourcePackages
           key: ${{ runner.os }}-swiftpm-${{ hashFiles('**/Package.resolved') }}
+
       - name: Build
         run: xcodebuild -project Example/Example.xcodeproj -scheme "${{ matrix.scheme }}" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13,OS=latest' -clonedSourcePackagesDirPath SourcePackages
