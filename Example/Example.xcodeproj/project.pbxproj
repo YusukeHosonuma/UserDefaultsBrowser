@@ -44,6 +44,7 @@
 		70A4A52F28251AB3007F2033 /* iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS.entitlements; sourceTree = "<group>"; };
 		70B1D331282C870A000D0386 /* SwiftUI-Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "SwiftUI-Common"; path = "../../SwiftUI-Common"; sourceTree = "<group>"; };
 		70F03A902826266600D86CAB /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
+		70FB86382920D1C500F19842 /* UserDefaultsBrowser */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UserDefaultsBrowser; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				70A4A52E28251A19007F2033 /* UserDefaults-Browser */,
+				70FB86382920D1C500F19842 /* UserDefaultsBrowser */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
