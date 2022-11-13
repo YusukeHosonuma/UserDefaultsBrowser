@@ -7,7 +7,6 @@
 
 import SwiftPrettyPrint
 import SwiftUI
-import SwiftUICommon
 
 private enum Value {
     case text(String)

@@ -1,0 +1,95 @@
+import CasePaths
+import SwiftUI
+
+public extension Binding {
+    //
+    // `Binding<Value>` -> `Binding<NewValue>`
+    //
+    func map<NewValue>(get: @escaping (Value) -> NewValue, set: @escaping (NewValue) -> Value) -> Binding<NewValue> {
+        .init(
+            get: { get(wrappedValue) },
+            set: { wrappedValue = set($0) }
+        )
+    }
+
+    //
+    // 🌱 Experimental.
+    //
+    // `Binding<Value>` -> `Binding<NewValue>` (`set` can be return `nil`)
+    //
+    // func map<NewValue>(get: @escaping (Value) -> NewValue, set: @escaping (NewValue) -> Value?) -> Binding<NewValue> {
+    //     .init(
+    //         get: { get(wrappedValue) },
+    //         set: {
+    //             if let value = set($0) {
+    //                 wrappedValue = value
+    //             }
+    //         }
+    //     )
+    // }
+    //
+    //
+    // `Binding<T>` -> `Binding<T?>`
+    //
+    func optional() -> Binding<Value?> {
+        .init(
+            get: { self.wrappedValue },
+            set: {
+                if let value = $0 {
+                    self.wrappedValue = value
+                }
+            }
+        )
+    }
+
+    //
+    // `Binding<T?>` -> `Binding<Bool>`
+    //
+    func isPresent<Wrapped>() -> Binding<Bool> where Value == Wrapped? {
+        .init(
+            get: { self.wrappedValue != nil },
+            set: {
+                if $0 == false {
+                    self.wrappedValue = nil
+                }
+            }
+        )
+    }
+
+    //
+    // `Binding<T?>` -> `Binding<T>?`
+    //
+    func wrapped<Wrapped>() -> Binding<Wrapped>? where Value == Wrapped? {
+        if let value = wrappedValue {
+            return .init(
+                get: { value },
+                set: { wrappedValue = $0 }
+            )
+        } else {
+            return nil
+        }
+    }
+
+    //
+    // `Binding<Enum>` -> `Binding<AssociatedValue>?`
+    //
+    func `case`<AssociatedValue>(_ path: CasePath<Value, AssociatedValue>) -> Binding<AssociatedValue>? {
+        if let value = path.extract(from: wrappedValue) {
+            return .init(
+                get: { value },
+                set: { wrappedValue = path.embed($0) }
+            )
+        } else {
+            return nil
+        }
+    }
+}
+
+public extension Binding where Value == Bool {
+    func inverted() -> Binding<Bool> {
+        .init(
+            get: { !wrappedValue },
+            set: { wrappedValue = !$0 }
+        )
+    }
+}
